@@ -13,6 +13,21 @@ export const SuccessContainer = styled("main", {
     color: "$gray100",
   },
 
+  ul: {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "1fr",
+    listStyle: "none",
+
+    li: {
+      gridArea: "1 / 1 / 2 / 2",
+      display: "inline-block",
+      "&+li": {
+        marginRight: "-1rem",
+      },
+    },
+  },
+
   p: {
     fontSize: "$xl",
     color: "$gray300",
@@ -36,17 +51,18 @@ export const SuccessContainer = styled("main", {
 });
 
 export const ImageContainer = styled("div", {
-  width: "100%",
-  maxWidth: 130,
+  width: 145,
   height: 145,
   background: "linear-gradient(180deg, #1ea483 0%, #7465d4 100%)",
-  borderRadius: 8,
+  borderRadius: "50%",
   padding: "0.25rem",
   marginTop: "4rem",
 
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+
+  boxShadow: "-2px 0px 12px black",
 
   img: {
     objectFit: "cover",

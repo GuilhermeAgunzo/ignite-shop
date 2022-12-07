@@ -35,8 +35,91 @@ export const CartContainer = styled("div", {
   },
 });
 
-export const CartProductListContainer = styled("div", {
+export const CartProductListContainer = styled("ul", {
   display: "flex",
   flexDirection: "column",
   gap: "1.5rem",
+  marginTop: "2rem",
+
+  li: {
+    width: "100%",
+
+    display: "flex",
+    alignItems: "center",
+    gap: "1.25rem",
+
+    img: {
+      maxWidth: 102,
+      height: 93,
+      background: "linear-gradient(180deg, #1ea483 0%, #7465d4 100%)",
+      borderRadius: 8,
+      objectFit: "cover",
+    },
+
+    div: {
+      display: "flex",
+      height: "100%",
+      padding: 0,
+      gap: "0.25rem",
+
+      h5: {
+        fontSize: "1.2rem",
+        fontWeight: 100,
+      },
+
+      strong: {
+        lineHeight: 1.6,
+        fontSize: "1.25rem",
+      },
+
+      button: {
+        width: "fit-content",
+        alignSelf: "flex-start",
+        color: "$green500",
+        fontSize: "1.2rem",
+        fontWeight: 600,
+      },
+    },
+  },
+});
+
+export const CartProductDetails = styled("div", {
+  display: "flex",
+});
+
+export const CartTotalizer = styled("div", {
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-end",
+
+  p: {
+    display: "flex",
+    justifyContent: "space-between",
+
+    strong: {
+      fontSize: "1.25rem",
+      fontWeight: "600",
+    },
+  },
+
+  "p + p": {
+    marginTop: "0.75rem",
+  },
+
+  button: {
+    width: "100%",
+    background: "$green500",
+    color: "$white",
+    padding: "2rem 1.25rem",
+    borderRadius: 8,
+    transition: "background 0.2s",
+    fontWeight: "bold",
+    fontSize: "$md",
+    marginTop: "3rem",
+
+    "&:hover": {
+      background: "$green300",
+    },
+  },
 });

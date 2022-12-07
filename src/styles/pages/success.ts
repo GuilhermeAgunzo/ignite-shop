@@ -18,6 +18,7 @@ export const SuccessContainer = styled("main", {
     gridTemplateColumns: "1fr",
     gridTemplateRows: "1fr",
     listStyle: "none",
+    marginBottom: "1.25rem",
 
     li: {
       gridArea: "1 / 1 / 2 / 2",

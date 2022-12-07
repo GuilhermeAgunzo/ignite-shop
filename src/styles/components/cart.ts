@@ -118,7 +118,11 @@ export const CartTotalizer = styled("div", {
     fontSize: "$md",
     marginTop: "3rem",
 
-    "&:hover": {
+    "&:disabled": {
+      cursor: "not-allowed",
+    },
+
+    "&:not(:disabled):hover": {
       background: "$green300",
     },
   },

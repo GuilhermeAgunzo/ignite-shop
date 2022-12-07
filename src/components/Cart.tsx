@@ -16,7 +16,6 @@ export function Cart() {
     cartDetails,
     cartCount,
     formattedTotalPrice,
-    redirectToCheckout,
     decrementItem,
     handleCloseCart,
   } = useShoppingCart();
@@ -82,7 +81,9 @@ export function Cart() {
           <b>Valor total</b>
           <strong>{formattedTotalPrice}</strong>
         </p>
-        <button onClick={handleCheckout}>Finalizar compra</button>
+        <button disabled={cartCount === 0} onClick={handleCheckout}>
+          Finalizar compra
+        </button>
       </CartTotalizer>
     </CartContainer>
   );

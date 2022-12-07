@@ -1,3 +1,4 @@
+import axios from "axios";
 import Image from "next/image";
 import { X } from "phosphor-react";
 import { useShoppingCart } from "use-shopping-cart";
@@ -15,6 +16,7 @@ export function Cart() {
     cartDetails,
     cartCount,
     formattedTotalPrice,
+    redirectToCheckout,
     decrementItem,
     handleCloseCart,
   } = useShoppingCart();
@@ -24,6 +26,16 @@ export function Cart() {
   for (const id in cartDetails) {
     const cartItem = cartDetails[id];
     cart.push(cartItem);
+  }
+
+  async function handleCheckout() {
+    const response = await axios.post("/api/cartcheckout", {
+      cart,
+    });
+
+    const { checkoutUrl } = response.data;
+
+    window.location.href = checkoutUrl;
   }
 
   return (
@@ -70,7 +82,7 @@ export function Cart() {
           <b>Valor total</b>
           <strong>{formattedTotalPrice}</strong>
         </p>
-        <button>Finalizar compra</button>
+        <button onClick={handleCheckout}>Finalizar compra</button>
       </CartTotalizer>
     </CartContainer>
   );

@@ -17,6 +17,7 @@ interface HomeProps {
     id: string;
     name: string;
     imgUrl: string;
+    priceId: string;
     price: string;
     unformmatedPrice: number;
   }[];
@@ -26,6 +27,7 @@ type CartProduct = {
   id: string;
   name: string;
   imgUrl: string;
+  priceId: string;
   price: string;
   unformmatedPrice: number;
 };
@@ -40,12 +42,21 @@ export default function Home({ products }: HomeProps) {
     },
   });
 
-  function handleAddCart({ id, name, imgUrl, unformmatedPrice }: CartProduct) {
+  function handleAddCart({
+    id,
+    name,
+    imgUrl,
+    priceId,
+    unformmatedPrice,
+  }: CartProduct) {
     addItem({
       id: id,
       name: name,
       image: imgUrl,
       price: unformmatedPrice,
+      price_data: {
+        price: priceId,
+      },
       currency: "BRL",
     });
   }
@@ -99,6 +110,7 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imgUrl: product.images[0],
+      priceId: price,
       unformmatedPrice: price.unit_amount,
       price: new Intl.NumberFormat("pt-BR", {
         style: "currency",

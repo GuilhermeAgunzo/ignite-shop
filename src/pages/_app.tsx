@@ -1,11 +1,12 @@
 import type { AppProps } from "next/app";
+import Image from "next/image";
 import { globalStyles } from "../styles/global";
 
 import logoImg from "../assets/Logo.svg";
 import { Container, Header } from "../styles/pages/app";
-import Image from "next/image";
 import { CartProvider } from "use-shopping-cart";
-import { Handbag } from "phosphor-react";
+import { ViewCartButton } from "../components/ViewCartButton";
+import { Cart } from "../components/Cart";
 
 globalStyles();
 
@@ -15,17 +16,17 @@ export default function App({ Component, pageProps }: AppProps) {
       cartMode="checkout-session"
       stripe={process.env.STRIPE_PUBLIC_KEY as string}
       currency="BRL"
-      shouldPersist={false}
+      shouldPersist={true}
     >
       <Container>
         <Header>
           <Image src={logoImg} alt="" />
-          <button>
-            <Handbag size={24} />
-          </button>
+          <ViewCartButton />
         </Header>
 
         <Component {...pageProps} />
+
+        <Cart />
       </Container>
     </CartProvider>
   );

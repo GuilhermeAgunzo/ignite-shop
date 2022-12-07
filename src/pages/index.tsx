@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { useKeenSlider } from "keen-slider/react";
 
@@ -11,6 +10,7 @@ import { GetStaticProps } from "next";
 import Stripe from "stripe";
 import Head from "next/head";
 import { Handbag } from "phosphor-react";
+import { useShoppingCart } from "use-shopping-cart";
 
 interface HomeProps {
   products: {
@@ -18,16 +18,37 @@ interface HomeProps {
     name: string;
     imgUrl: string;
     price: string;
+    unformmatedPrice: number;
   }[];
 }
 
+type CartProduct = {
+  id: string;
+  name: string;
+  imgUrl: string;
+  price: string;
+  unformmatedPrice: number;
+};
+
 export default function Home({ products }: HomeProps) {
+  const { addItem } = useShoppingCart();
+
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
       spacing: 48,
     },
   });
+
+  function handleAddCart({ id, name, imgUrl, unformmatedPrice }: CartProduct) {
+    addItem({
+      id: id,
+      name: name,
+      image: imgUrl,
+      price: unformmatedPrice,
+      currency: "BRL",
+    });
+  }
 
   return (
     <>
@@ -50,7 +71,11 @@ export default function Home({ products }: HomeProps) {
                   <strong>{product.name}</strong>
                   <span>{product.price}</span>
                 </div>
-                <button>
+                <button
+                  onClick={() => {
+                    handleAddCart(product);
+                  }}
+                >
                   <Handbag size={24} color="white" />
                 </button>
               </footer>
@@ -74,6 +99,7 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imgUrl: product.images[0],
+      unformmatedPrice: price.unit_amount,
       price: new Intl.NumberFormat("pt-BR", {
         style: "currency",
         currency: "BRL",
